@@ -650,6 +650,7 @@ namespace ORB_SLAM3
         int nmatches=0;
         vnMatches12 = vector<int>(F1.mvKeysUn.size(),-1);
 
+        // TODO: yjl 不需要每次都重新生成histogram
         vector<int> rotHist[HISTO_LENGTH];
         for(int i=0;i<HISTO_LENGTH;i++)
             rotHist[i].reserve(500);

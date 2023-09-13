@@ -654,6 +654,7 @@ Eigen::Vector3f Frame::inRefCoordinates(Eigen::Vector3f pCw)
     return mRcw * pCw + mtcw;
 }
 
+//TODO: yjl 避免动态分配内存
 vector<size_t> Frame::GetFeaturesInArea(const float &x, const float  &y, const float  &r, const int minLevel, const int maxLevel, const bool bRight) const
 {
     vector<size_t> vIndices;
@@ -692,7 +693,8 @@ vector<size_t> Frame::GetFeaturesInArea(const float &x, const float  &y, const f
     {
         for(int iy = nMinCellY; iy<=nMaxCellY; iy++)
         {
-            const vector<size_t> vCell = (!bRight) ? mGrid[ix][iy] : mGridRight[ix][iy];
+            // TODO: yjl 没有使用引用
+            const vector<size_t>& vCell = (!bRight) ? mGrid[ix][iy] : mGridRight[ix][iy];
             if(vCell.empty())
                 continue;
 
